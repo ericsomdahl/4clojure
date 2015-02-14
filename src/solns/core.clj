@@ -56,4 +56,34 @@
 ;;; Intro to Sequences
 (= 3  (first '(3 2 1)))
 
+;;; 13
+;;; Sequences: rest
+(= [20 30 40] (rest  [10 20 30 40]))
+
+;;; 14
+;;; Intro to Functions
+(= 8  ((fn add-five  [x]  (+ x 5)) 3))
+
+;;; 15
+;;; Double down
+(=  (#(* 2 %) 2) 4)
+
+;;; 16
+;;; Hello World
+(=  (#(str "Hello, " % "!") "Dave") "Hello, Dave!")
+
+;;; 17
+;;; Sequences: map
+(= [6 7 8]  (map #(+ % 5) '(1 2 3)))`
+
+;;; 18
+;;; Sequences: filter
+(= [6 7] (filter #(> % 5) '(3 4 5 6 7)))
+
+
+
+
+
+
+
 
