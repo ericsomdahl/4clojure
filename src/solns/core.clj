@@ -25,7 +25,7 @@
 
 ;;; 6
 ;;; Intro to Vectors
-(=  [:a :b :c]  (list :a :b :c)  (vec '(:a :b :c))  (vector :a :b :c))
+(=  [:a :b :c] (list :a :b :c)  (vec '(:a :b :c))  (vector :a :b :c))
 
 ;;; 7
 ;;; Vectors: conj
@@ -38,8 +38,22 @@
 ;;; or
 (set '(:a :b :c :d))
 
+;;; 9
+;;; sets: conj
+(= #{1 2 3 4}  (conj #{1 4 3} 2))
 
+;;; 10
+;;; Intro to Maps
+(= 20 ((hash-map :a 10, :b 20, :c 30) :b))
 
+;;; 11
+;;; Maps: conj
+(=  {:a 1, :b 2, :c 3}  (conj  {:a 1} [:b 2]  [:c 3]))
+;;; or
+{:b 2}
 
+;;; 12
+;;; Intro to Sequences
+(= 3  (first '(3 2 1)))
 
 
