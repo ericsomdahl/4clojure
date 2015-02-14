@@ -105,7 +105,7 @@
            h
            (get-nth r (dec n)))))
 
-;;; destructuring must use nth under the hood because this tripped 
+;;; but destructuring must use nth under the hood because this tripped
 ;;; the nth restriction on the problem.
 (fn twenty-one
    [[h & r] n]
@@ -115,5 +115,11 @@
 
 (=  ( x '(4 5 6 7) 2) 6)
 
+;;; 22
+;;; Count a sequence
+(def x (fn [l] l ))
 
+(x '(1 2 3))
+
+(= ( x '(1 2 3 3 1)) 5)
 
