@@ -80,10 +80,40 @@
 ;;; Sequences: filter
 (= [6 7] (filter #(> % 5) '(3 4 5 6 7)))
 
+;;; 19
+;;; Last Element
+(=  (#(first (reverse %))  [1 2 3 4 5]) 5)
 
+;;; 20
+;;; Penultimate Element
+(=  (#(first (rest (reverse %)))  (list 1 2 3 4 5)) 4)
+;;; or
+(=  (#(second (reverse %))  (list 1 2 3 4 5)) 4)
 
+;;; 21
+;;; n-th element
 
+;;; the first solution I came up with
+#(cond
+   (= 0 %2) (first %1)
+   (not= 0 %2) (recur  (rest %1)  (dec %2)))
 
+;;; after I learned some destructuring
+(def x (fn get-nth
+         [[h & r] n]
+         (if (= n 0)
+           h
+           (get-nth r (dec n)))))
+
+;;; destructuring must use nth under the hood because this tripped 
+;;; the nth restriction on the problem.
+(fn twenty-one
+   [[h & r] n]
+     (if (= n 0)
+        h
+        (twenty-one r (dec n))))
+
+(=  ( x '(4 5 6 7) 2) 6)
 
 
 
