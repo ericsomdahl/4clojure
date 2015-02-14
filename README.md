@@ -1,36 +1,14 @@
 # solns
 
-FIXME: description
+My solutions from http://4clojure.com
 
-## Installation
-
-Download from http://example.com/FIXME.
-
-## Usage
-
-FIXME: explanation
-
-    $ java -jar solns-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
+Having fun learning clojure.  My biggest takeaway so far is that knowledge of the capabilities of clojure.core 
+goes a REALLY long way.
 
 ...
 
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015 Eric Somdahl
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
