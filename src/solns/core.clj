@@ -165,10 +165,72 @@
 
 (= (twenty-six 3) '(1 1 2))
 
+;;; 27
+;;; Palindrome detector
+
+;;; my first solution
+(def twenty-seven (fn [x] (= (partition 1 x) (reverse (partition 1 x)))))
+
+;;; looked at other solutions, apparently seq is more idiomatic
+(def twenty-seven (fn [x] (= (seq x) (reverse (seq x)))))
+(twenty-seven "racecar")
+
+;;; 28
+;;; Flatten a Sequence
+
+(def x (fn inner 
+          [s] (let 
+                 [a (vector s) 
+                  h (first a)
+                  t (rest a)]
+                 (if 
+                   (empty? t)
+                   h
+                   (seq h (inner t))
+                   )
+                  ) ))
+
+(def x1 (fn inner [& s] (if 
+                  (= (count s) 1)
+                  s
+                  (mapcat inner (rest s)))))
+
+(def x2 (fn inner [& s] () (partition 1 s)))
+
+(x '(:a :b :c (:d :e)))
+(x '(:a :b))
+
+(vector :a)
+
+(flatten '(1 2 3))
+
+(tree-seq seq? identity '(1))
+
+((filter (complement sequential?)
+          (rest (tree-seq sequential? seq x))))
+
+(partition 1 '(:a 1 3))
+
+(x2 2 3)
+(x2 '(4 5))
+
+(mapcat (fn inner 
+          [& s] (if 
+                  (= (count s) 1)
+                  s
+                  (mapcat inner (rest s)))) '(:a 1 2 3 (4 5)))
 
 
-
-
+(mapcat (fn inner 
+          [& s] (let 
+                 [h (first s)
+                  t (rest s)]
+                 (if 
+                   (empty? t)
+                   (seq h)
+                   (seq h (inner t))
+                   )
+                  ) ) '( :a (1 2 4) (3 5) ))
 
 
 
