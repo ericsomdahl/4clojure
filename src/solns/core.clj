@@ -139,6 +139,40 @@
 (reduce twenty-three [1 2 3] )
 (= (reduce twenty-three [[1 2][3 4][5 6]]) [[5 6][3 4][1 2]])
 
+;;; 24
+;;; Sum It All Up
+(def twenty-four #(reduce + %))
+(= (twenty-four [1 2 3]) 6)
+
+;;; 25
+;;; Filter the Odds
+(def twenty-five #(filter odd? %))
+
+(= (twenty-five  #{1 2 3 4 5}) '(1 3 5))
+
+;;; 26
+;;; Fibonacci Sequence
+
+;;; this has O(n!) performance -- ugh
+(def twenty-six
+  (fn [n]
+    (map (fn inner [x]
+           (if (<= x 2)
+            1
+            (+ (inner (- x 1)) (inner (- x 2))))) (range 1 (inc n)))))
+
+(twenty-six 9)
+
+(= (twenty-six 3) '(1 1 2))
+
+
+
+
+
+
+
+
+
 
 
 
