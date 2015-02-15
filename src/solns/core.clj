@@ -117,9 +117,30 @@
 
 ;;; 22
 ;;; Count a sequence
-(def x (fn [l] l ))
 
-(x '(1 2 3))
+;;; third solution I came up with, after having not looked at it for a while
 
-(= ( x '(1 2 3 3 1)) 5)
+(def twenty-two
+  (fn [t]  (reduce + (map (fn [&t] 1) t))))
+
+;;; second solution, derived from looking at other solutions
+(def twenty-two
+  '(reduce  (fn  [c _]  (inc c)) 0))
+
+(= ( twenty-two '(1 2 3 3 1)) 5)
+
+;;; 23
+;;; Reverse a Sequence
+(def twenty-three (fn [x y]
+          (conj (if (list? x)
+                  x
+                  (list x)) y)))
+
+(reduce twenty-three [1 2 3] )
+(= (reduce twenty-three [[1 2][3 4][5 6]]) [[5 6][3 4][1 2]])
+
+
+
+
+
 
