@@ -178,63 +178,29 @@
 ;;; 28
 ;;; Flatten a Sequence
 
-(def x (fn inner 
-          [s] (let 
-                 [a (vector s) 
-                  h (first a)
-                  t (rest a)]
-                 (if 
-                   (empty? t)
-                   h
-                   (seq h (inner t))
-                   )
-                  ) ))
+;;; I actually started playing with mapcat for this but I eventually
+;;; looked at the source of core.flatten on this one
 
-(def x1 (fn inner [& s] (if 
-                  (= (count s) 1)
-                  s
-                  (mapcat inner (rest s)))))
-
-(def x2 (fn inner [& s] () (partition 1 s)))
-
-(x '(:a :b :c (:d :e)))
-(x '(:a :b))
-
-(vector :a)
-
-(flatten '(1 2 3))
-
-(tree-seq seq? identity '(1))
+(def twenty-eight #(filter (complement sequential?) (tree-seq sequential? identity %)))
 
 ((filter (complement sequential?)
           (rest (tree-seq sequential? seq x))))
 
-(partition 1 '(:a 1 3))
+(= (twenty-eight '((1 2) 3 [4 [5 6]])) '(1 2 3 4 5 6))
+(twenty-eight '(:a 1 3 (2 4)))
 
-(x2 2 3)
-(x2 '(4 5))
+;;; 29
+;;; Get the caps
 
-(mapcat (fn inner 
-          [& s] (if 
-                  (= (count s) 1)
-                  s
-                  (mapcat inner (rest s)))) '(:a 1 2 3 (4 5)))
+;;; my first solution
+(def upper? (fn [c] (java.lang.Character/isUpperCase c)))
+(def twenty-nine (fn [x]  (apply str (filter (fn [c] (java.lang.Character/isUpperCase c)) x))))
 
+(twenty-nine "HeLlO, WoRlD!")
+(= (twenty-nine "HeLlO, WoRlD!") "HLOWRD")
 
-(mapcat (fn inner 
-          [& s] (let 
-                 [h (first s)
-                  t (rest s)]
-                 (if 
-                   (empty? t)
-                   (seq h)
-                   (seq h (inner t))
-                   )
-                  ) ) '( :a (1 2 4) (3 5) ))
-
-
-
-
+;;; apparently regexes are more idiomatic?
+(apply str (re-seq #"[A-Z]" "HeLLo"))
 
 
 
