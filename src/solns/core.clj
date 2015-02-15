@@ -202,6 +202,28 @@
 ;;; apparently regexes are more idiomatic?
 (apply str (re-seq #"[A-Z]" "HeLLo"))
 
+;;; 30
+;;; Compress a sequence
+
+;;; here was my first solution.  My eyes!
+(def thirty (fn cmpr [s]
+  (when-let [[h & t] (seq s)]
+    (if (= h (first t))
+      (cmpr t)
+      (cons h (cmpr t))))))
+
+;;; after grokking some other ways...
+(def thirty (fn [l]  (apply str (map first (partition-by identity l))) ))
+
+(def thirty (fn [l] (map first (partition-by identity l))))
+
+( thirty "Heelloo")
+(=  (apply str (thirty "Leeeeeerrroyyy")) "Leroy")
+
+(= (thirty [1 1 2 3 3 2 2 3]) '(1 2 3 2 3))
+
+
+
 
 
 
