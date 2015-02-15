@@ -213,17 +213,42 @@
       (cons h (cmpr t))))))
 
 ;;; after grokking some other ways...
-(def thirty (fn [l]  (apply str (map first (partition-by identity l))) ))
-
 (def thirty (fn [l] (map first (partition-by identity l))))
 
-( thirty "Heelloo")
+(thirty "Heelloo")
 (=  (apply str (thirty "Leeeeeerrroyyy")) "Leroy")
 
 (= (thirty [1 1 2 3 3 2 2 3]) '(1 2 3 2 3))
 
+;;; 31
+;;; Pack a sequence
+
+;;; It would make more sense for 31 to come before 30 if this were a straight-up
+;;; tutorial
+(def thirty-one (fn [s] (partition-by identity s)))
+(= (thirty-one [1 1 2 1 1 1 3 3]) '((1 1) (2) (1 1 1) (3 3)))
+
+;;; 32
+;;; Duplicate a sequence
+(def thirty-two (fn [x]
+                  (mapcat (fn [i]
+                            (vector i i)) x)))
+
+(thirty-two [1 2 3])
+
+(= (thirty-two [1 2 3]) '(1 1 2 2 3 3))
 
 
+;;; 33
+;;; Replicate a sequence
+
+(def thirty-three
+  (fn [& x]
+    (mapcat #(list (repeat n x)))))
+
+(thirty-three [] 1 2
+
+(= (__ [1 2] 3 2) '(1 1 2 2 3 3)))
 
 
 
