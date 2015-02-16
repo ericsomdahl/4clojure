@@ -243,12 +243,28 @@
 ;;; Replicate a sequence
 
 (def thirty-three
-  (fn [& x]
-    (mapcat #(list (repeat n x)))))
+  (fn [x n] (mapcat #(repeat n %) x)))
 
-(thirty-three [] 1 2
+(thirty-three [1 2 4 3 1] 3)
 
-(= (__ [1 2] 3 2) '(1 1 2 2 3 3)))
+(= (thirty-three [1 2 3] 2) '(1 1 2 2 3 3))
+
+;;; 34
+;;; Implement Range
+(def thirty-four
+  (fn [x y]
+    (if (< x (dec y))
+      (cons x (lazy-seq (thirty-four (inc x) y)))
+      (list (dec y)))))
+
+(= (thirty-four 1 4) '(1 2 3))
+
+;;; as a second take
+(def thirty-four (fn [x y] (take (- y x) (iterate inc x))))
+
+
+
+
 
 
 
