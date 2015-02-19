@@ -299,9 +299,23 @@
 (= (thirty-nine [1 2 3] [:a :b :c]) '(1 :a 2 :b 3 :c))
 
 
+;;; I was thinking about mapcat but couldn't get anything.  Simple solutions are simple
+(def thirty-nine #(mapcat list %1 %2))
 
+;;; 40
+;;; Interpose a Seq
 
+(def forty
+  (fn [x y] (reverse (rest (reverse (mapcat #(list % x) y))))))
 
+(= (forty 0 [1 2 3]) [1 0 2 0 3])
+
+(forty 0 [1 2 3])
+
+;;;second take, mostly the same but there is a butlast function!
+
+(def forty
+  (fn [x y] (butlast (mapcat #(list % x) y))))
 
 
 
