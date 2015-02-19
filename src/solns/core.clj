@@ -262,6 +262,42 @@
 ;;; as a second take
 (def thirty-four (fn [x y] (take (- y x) (iterate inc x))))
 
+;;; 35
+;;; Local Bindings
+
+(= 7 (let [x 5] (+ 2 x)))
+
+;;; 36
+;;; Let It Be
+(= 10 (let [z 1 y 3 x 7] (+ x y)))
+
+;;; 37
+;;; Regular Expressions
+(= "ABC" (apply str (re-seq #"[A-Z]+" "bA1B3Ce ")))
+
+;;; 38
+;;; Maximum Value
+(def thirty-eight (fn [& l] (last (sort l))))
+
+(thirty-eight 1 2 3 4)
+
+(=  ( thirty-eight  1 8 3 4) 8)
+
+;;; 39
+;;; Interleave Two Sequences
+
+(def thirty-nine
+  (fn
+    [x y] (let [a (seq x) b (seq y)]
+            (if-not (or (empty? a) (empty? b))
+              (conj (conj (lazy-seq (thirty-nine (rest a) (rest b))) (first b) ) (first a))
+              '()))))
+
+(thirty-nine [1 3 :a] [2 4 :b])
+(thirty-nine [1 2 3 4] [:a :b :c])
+
+(= (thirty-nine [1 2 3] [:a :b :c]) '(1 :a 2 :b 3 :c))
+
 
 
 
