@@ -350,8 +350,7 @@
   (fn [x y]
     (let [m (partition y x)]
       (for [i (range y)]
-        (map #(nth % i) m)
-        ))))
+        (map #(nth % i) m)))))
 
 (forty-three (range 9) 3)
 
@@ -359,6 +358,20 @@
 (= (forty-three [1 2 3 4 5 6] 2) '((1 3 5) (2 4 6)))
 
 
+;;; 44
+;;; Rotate a Sequence
+
+(def forty-four
+  (fn [c v]
+    (last (let [x (inc (mod (+ (count v) c) (count v)))]
+      (take x (iterate #(conj (vec (rest %)) (first %)) v))
+      ))))
+;;;just a single rotate op
+(#(conj (vec (rest %)) (first %)) [1 2 3 4 5 6])
+;;; for negative rotations, rotate all the way around
+
+(= (forty-four 2 [1 2 3 4 5]) '(3 4 5 1 2))
+(= (forty-four -2 [1 2 3 4 5]) '(4 5 1 2 3))
 
 
 
