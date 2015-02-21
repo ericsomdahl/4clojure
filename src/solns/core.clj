@@ -327,7 +327,49 @@
                 %)
             (partition-all y x))))
 
+
 (= (forty-one [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])
+
+
+;;; take is more idiomatic
+(def forty-one
+  (fn [x y]
+    (mapcat #(take (dec y) %)
+            (partition-all y x))))
+
+;;; 42
+;;; Factorial Fun
+
+(def forty-two (fn fac [x] (if (zero? x) 1 (* x (fac (dec x))))))
+
+(= (forty-two  5) 120)
+
+;;; 43
+;;; Reverse Interleave
+(def forty-three
+  (fn [x y]
+    (let [m (partition y x)]
+      (for [i (range y)]
+        (map #(nth % i) m)
+        ))))
+
+(forty-three (range 9) 3)
+
+(= (forty-three (range 9) 3) '((0 3 6) (1 4 7) (2 5 8)))
+(= (forty-three [1 2 3 4 5 6] 2) '((1 3 5) (2 4 6)))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
