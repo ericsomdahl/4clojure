@@ -374,8 +374,19 @@
 (= (forty-four -2 [1 2 3 4 5]) '(4 5 1 2 3))
 
 
+;;; 45
+;;; Intro to iterate
+(take 5 (iterate #(+ 3 %) 1))
 
+(= '(1 4 7 10 13) (take 5 (iterate #(+ 3 %) 1)))
 
+;;; 46
+;;; Flipping Out
+
+(def forty-six (fn [f] #(f %2 %1) ))
+
+((forty-six nth) 2 [1 2 3 4 5])
+(= 3 ((forty-six nth) 2 [1 2 3 4 5]))
 
 
 
