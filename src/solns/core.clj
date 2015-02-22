@@ -424,6 +424,17 @@
 (= (set (fifty [1 :a 2 :b 3 :c])) #{[1 2 3] [:a :b :c]})
 
 
+;;; 51
+;;; Advanced Destructuring
+
+(= [1 2 [3 4 5] [1 2 3 4 5]] (let [[a b & c :as d] '(1 2 3 4 5)] [a b c d]))
+
+
+;;; 52
+;;; Intro to Destructuring
+
+(= [2 4] (let [[a b c d e f g] (range)] [c e]))
+
 
 
 
