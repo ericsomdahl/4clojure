@@ -414,6 +414,15 @@
 (= (forty-nine 3 [1 2 3 4 5 6]) [[1 2 3] [4 5 6]])
 
 
+;;; 50
+;;; Split By Type
+
+(def fifty (fn [x] (vals (group-by type x))))
+
+(vals (group-by type [1 :a 2 :b 3 :c]))
+
+(= (set (fifty [1 :a 2 :b 3 :c])) #{[1 2 3] [:a :b :c]})
+
 
 
 
