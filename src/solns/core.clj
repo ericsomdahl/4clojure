@@ -388,10 +388,30 @@
 ((forty-six nth) 2 [1 2 3 4 5])
 (= 3 ((forty-six nth) 2 [1 2 3 4 5]))
 
+;;; 47
+;;; Contain Yourself
+
+(contains? #{4 5 6} 4)
 
 
+;;; 48
+;;; Intro to Some
 
+(= 6 (some #{2 7 6} [5 6 7 8]))
 
+;;; 49
+;;; Split a Sequence
+
+;;; ooo, fancy -- threading
+(def forty-nine
+  (fn [x y]
+    (-> []
+        (conj (vec (take x y)))
+        (conj (vec (nthnext y x))))))
+
+(forty-nine 2 [1 2 3 4 5 6])
+
+(= (forty-nine 3 [1 2 3 4 5 6]) [[1 2 3] [4 5 6]])
 
 
 
