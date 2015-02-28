@@ -436,8 +436,26 @@
 (= [2 4] (let [[a b c d e f g] (range)] [c e]))
 
 
+;;; 53
+;;; Longest Increasing Sub-Seq
+
+(def fifty-three (fn [a] (let [] )))
+
+(= (fifty-three [1 0 1 2 3 0 4 5]) [0 1 2 3])
 
 
+;;; 54
+;;; Partition a Sequence
+
+(def fifty-four (fn inner [c s]
+                  (if (< (count s) c)
+                    nil
+                    (cons (take c s) (lazy-seq (inner c (drop c s)))))))
+
+(fifty-four 3 (range 9))
+(fifty-four 3 (range 8))
+(= (fifty-four 3 (range 9)) '((0 1 2) (3 4 5) (6 7 8)))
+(= (fifty-four 3 (range 8)) '((0 1 2) (3 4 5)))
 
 
 
