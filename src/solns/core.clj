@@ -439,10 +439,34 @@
 ;;; 53
 ;;; Longest Increasing Sub-Seq
 
-(def fifty-three (fn [a] (let [] )))
+(def fifty-three
+  (fn [x]
+    (let [seq-map
+          (->> ((fn gen-seq
+                  ([s] (gen-seq s 1))
+                  ([s t] (cond
+                           (empty? s) nil
+                           (= (count s) t) (cons s (lazy-seq (gen-seq (rest s) 1)))
+                           :else (cons (take t s) (lazy-seq (gen-seq s (inc t))))))) x)
+               (filter (fn [e] (> (count e) 1)))
+               (filter (fn [e] (apply < e)))
+               (group-by count))
+          m-key (if (seq seq-map)
+                  (apply max (keys seq-map))
+                  nil)]
+      (vec (first (seq-map m-key))))))
+
+(fifty-three [1 0 1 2 3 0 4 5])
+(fifty-three [7 6 5])
 
 (= (fifty-three [1 0 1 2 3 0 4 5]) [0 1 2 3])
 
+(def y ((fn gen-seq
+    ([s] (gen-seq s 1))
+    ([s t] (cond
+             (empty? s) nil
+             (= (count s) t) (cons s (lazy-seq (gen-seq (rest s) 1)))
+             :else (cons (take t s) (lazy-seq (gen-seq s (inc t))) )))) [5 6 1 3 2 7]))
 
 ;;; 54
 ;;; Partition a Sequence
@@ -454,6 +478,7 @@
 
 (fifty-four 3 (range 9))
 (fifty-four 3 (range 8))
+
 (= (fifty-four 3 (range 9)) '((0 1 2) (3 4 5) (6 7 8)))
 (= (fifty-four 3 (range 8)) '((0 1 2) (3 4 5)))
 
