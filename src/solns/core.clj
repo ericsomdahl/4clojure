@@ -442,12 +442,13 @@
 (def fifty-three
   (fn [x]
     (let [seq-map
-          (->> ((fn gen-seq
+          (->> x
+               (fn gen-seq
                   ([s] (gen-seq s 1))
                   ([s t] (cond
                            (empty? s) nil
                            (= (count s) t) (cons s (lazy-seq (gen-seq (rest s) 1)))
-                           :else (cons (take t s) (lazy-seq (gen-seq s (inc t))))))) x)
+                           :else (cons (take t s) (lazy-seq (gen-seq s (inc t)))))))
                (filter (fn [e] (> (count e) 1)))
                (filter (fn [e] (apply < e)))
                (group-by count))
@@ -457,7 +458,7 @@
       (vec (first (seq-map m-key))))))
 
 (fifty-three [1 0 1 2 3 0 4 5])
-(fifty-three [7 6 5])
+(fifty-three [7 6 5 6 3])
 
 (= (fifty-three [1 0 1 2 3 0 4 5]) [0 1 2 3])
 
@@ -483,6 +484,34 @@
 (= (fifty-four 3 (range 8)) '((0 1 2) (3 4 5)))
 
 
+;;; 55
+;;; Count Occurences
 
+(def fifty-five
+  (fn [s]
+    (let [v (->> (sort s)
+                 (partition-by identity)
+                 (group-by count)
+                 (vals))]
+      ((fn build [m [vh & vt]]
+                    (let [k (first (first vh))
+                          v (count (first vh))
+                          new-map (assoc m k v)]
+                      (if (nil? vt)
+                        new-map
+                        (build new-map vt))
+                      )) {} v))))
+
+(= (fifty-five [1 1 2 3 2 1 1]) {1 4, 2 2, 3 1})
+(= (fifty-five [:b :a :b :a :b]) {:a 2, :b 3})
+(= (fifty-five '([1 2] [1 3] [1 3])) {[1 2] 1, [1 3] 2})
+
+(fifty-five [1 1 2 3 2 1 1])
+(fifty-five '([1 2] [1 3] [1 3]))
+
+;;; apparently merge-with is a thing
+(def fifty-five
+  (fn [v]
+    (apply merge-with + (map (fn [key] {key 1}) v))))
 
 
