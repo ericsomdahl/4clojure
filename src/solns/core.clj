@@ -515,3 +515,22 @@
     (apply merge-with + (map (fn [key] {key 1}) v))))
 
 
+;;; 56
+;;; Find Distinct Items
+
+(def fifty-six
+  (fn distinkt
+    ([v] (distinkt v []))
+    ([[h & t] acc] (let [s (set acc) ] 
+                     (if (contains? s h) 
+                       (distinkt t acc) 
+                       (conj (distinkt t acc) h)))) ))
+
+(fifty-six  [1 2 1 3 1 2 4])
+
+(=  (fifty-six  [1 2 1 3 1 2 4])  [1 2 3 4])
+
+
+
+
+
