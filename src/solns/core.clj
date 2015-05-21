@@ -521,10 +521,11 @@
 (def fifty-six
   (fn distinkt
     ([v] (distinkt v []))
-    ([[h & t] acc] (let [s (set acc) ] 
-                     (if (contains? s h) 
-                       (distinkt t acc) 
-                       (conj (distinkt t acc) h)))) ))
+    ([[h & t] acc] (let [s (set acc) ]
+                     (cond
+                       (nil? h) acc
+                       (contains? s h) (distinkt t acc)
+                       :else (distinkt t (conj acc h)))))))
 
 (fifty-six  [1 2 1 3 1 2 4])
 
