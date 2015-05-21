@@ -531,6 +531,29 @@
 
 (=  (fifty-six  [1 2 1 3 1 2 4])  [1 2 3 4])
 
+;;; 57
+;;; Simple Recursion
+(= [5 4 3 2 1]  ((fn foo  [x]  (when  (> x 0)  (conj  (foo  (dec x)) x))) 5))
+
+
+;;; 58
+;;; Function Composition
+(def fifty-eight
+  (fn komp [& t]
+    (reduce (fn [f g]
+              #(f (apply g %&)))
+            t)))
+
+((fn [& fs]  (reduce (fn [f g] #(f (apply g %&))) fs )) [rest reverse])
+
+(partial rest ((partial reverse) [1 2 3 4]))
+
+((fifty-eight rest reverse ) [1 2 3 4])
+
+(= [3 2 1] ((__ rest reverse) [1 2 3 4]))
+
+
+
 
 
 
