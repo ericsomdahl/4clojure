@@ -540,17 +540,15 @@
 ;;; Function Composition
 (def fifty-eight
   (fn komp [& t]
-    (reduce (fn [f g]
-              #(f (apply g %&)))
-            t)))
+    (reduce
+      (fn [f g] #(f (apply g %&)))
+      t)))
 
-((fn [& fs]  (reduce (fn [f g] #(f (apply g %&))) fs )) [rest reverse])
-
-(partial rest ((partial reverse) [1 2 3 4]))
+((fn [& fs]  (reduce (fn [f g] #(f (apply g %&))) fs )) rest reverse)
 
 ((fifty-eight rest reverse ) [1 2 3 4])
 
-(= [3 2 1] ((__ rest reverse) [1 2 3 4]))
+(= [3 2 1] ((fifty-eight rest reverse) [1 2 3 4]))
 
 
 

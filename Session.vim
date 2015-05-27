@@ -8,7 +8,8 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 src/solns/core.clj
+badd +8 ~/clojure/4clojure
+badd +1 src/solns/core.clj
 argglobal
 silent! argdel *
 argadd ~/clojure/4clojure
@@ -28,12 +29,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 542 - ((36 * winheight(0) + 27) / 55)
+let s:l = 552 - ((43 * winheight(0) + 29) / 59)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-542
-normal! 015|
+552
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
