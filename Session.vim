@@ -8,12 +8,13 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +8 ~/clojure/4clojure
-badd +1 src/solns/core.clj
+badd +574 src/solns/core.clj
+badd +2422 zipfile:/Users/eric.somdahl/.m2/repository/org/clojure/clojure/1.6.0/clojure-1.6.0.jar::clojure/core.clj
+badd +0 LICENSE
 argglobal
 silent! argdel *
 argadd ~/clojure/4clojure
-edit src/solns/core.clj
+edit LICENSE
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -29,12 +30,13 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 552 - ((43 * winheight(0) + 29) / 59)
+let s:l = 1 - ((0 * winheight(0) + 29) / 59)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-552
+1
 normal! 0
+lcd ~/clojure/4clojure
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

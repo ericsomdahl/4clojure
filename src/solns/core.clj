@@ -550,8 +550,21 @@
 
 (= [3 2 1] ((fifty-eight rest reverse) [1 2 3 4]))
 
+;;; 59
+;;; Juxtaposition
+
+(def fifty-nine
+  (fn [& f] (map #(partial %) f)))
 
 
+((fn [& a] (map #(apply % a) ((fn [& f] (map #(partial %) f)) + max min))) 2 3 5 1 6 4)
+
+((fn [& a] (map #(apply % a) ((fn [& f] (map #(partial %) f)) + max min))) 2 3 5 1 6 4)
+
+(= [21 6 1] ((fifty-nine + max min) 2 3 5 1 6 4))
+
+
+((juxt + max min) 1 2 3)
 
 
 
